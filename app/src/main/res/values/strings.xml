@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TrackingSystem</string>
+    <string name="Anzeigen">Anzeigen</string>
     <string name="back">Zurück</string>
 </resources>
