@@ -2,8 +2,8 @@ package com.example.trackingsystem;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -38,6 +38,7 @@ public class AnzeigenActivity extends AppCompatActivity {
             double lat = rows.getDouble(2);
             String date = rows.getString(3);
             GPS gps = new GPS(lon, lat, date);
+            list.add(gps);
         }
 
         rows.close();
@@ -50,5 +51,9 @@ public class AnzeigenActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         listView = findViewById(R.id.listViewGPS);
         listView.setAdapter(adapter);
+    }
+
+    public void onBtnZurueckClicked(View v) {
+        this.finish();
     }
 }

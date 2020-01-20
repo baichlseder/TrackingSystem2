@@ -10,14 +10,18 @@ public class GPS {
     double longitude;
     String myDate;
 
-    public GPS() {
-
-    }
+    public GPS() { }
 
     public GPS(double latitude, double longitude, String myDate) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.myDate = myDate;
+    }
+
+    public GPS(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.myDate = getSysdate();
     }
 
     public double getLatitude() {
@@ -52,5 +56,9 @@ public class GPS {
                 '}';
     }
 
-
+    private static String getSysdate(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.mm.yyyy  HH:mm");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
+    }
 }

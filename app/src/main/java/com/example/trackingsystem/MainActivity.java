@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private void displayLocation(Location location){
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
-        GPS gps = new GPS(latitude,longitude,getSysdate());
+        GPS gps = new GPS(latitude,longitude);
 
         EditText edLat = findViewById(R.id.editTextLat);
         EditText edLong = findViewById(R.id.editTextLon);
@@ -83,16 +83,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
         edLat.setText(String.format("%.4f",latitude));
         edLong.setText(String.format("%.4f",longitude));
-        edDate.setText(getSysdate());
+        edDate.setText(gps.getMyDate());
 
 
 
 
-    }
-    public static String getSysdate(){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.mm.yyyy  HH:mm");
-        LocalDateTime now = LocalDateTime.now();
-        return dtf.format(now);
     }
 
     private void anzeigenClick( View source){

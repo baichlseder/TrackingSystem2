@@ -22,5 +22,6 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
+        android:onClick="onBtnZurueckClicked"
         android:text="@string/back" />
 </LinearLayout>
