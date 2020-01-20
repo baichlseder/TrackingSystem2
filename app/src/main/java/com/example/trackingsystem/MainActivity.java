@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.time.LocalDateTime;
@@ -26,6 +30,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         locMan = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Button btnShow = findViewById(R.id.btnAnzeigen);
+        btnShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AnzeigenActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -85,12 +97,21 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         edLong.setText(String.format("%.4f",longitude));
         edDate.setText(gps.getMyDate());
 
+        final String insert_GPS = "INSERT INTO GPS (GpsID,Longitude,Latitide,Date) VALUES(?,?,?,?)";
+        final String GET_COUNTID = "SELECT COUNT(*) FROM GPS";
+        MySQLiteHelper dbHelper = new MySQLiteHelper(this);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor row = db.rawQuery(GET_COUNTID,null);
+        int id=0;
+        if(row.moveToNext()){
+            id=row.getInt(0)+1;
+        }
+        db.rawQuery(insert_GPS,new String[]{String.valueOf(id), String.valueOf(longitude), String.valueOf(latitude),gps.getMyDate()});
 
 
 
     }
 
-    private void anzeigenClick( View source){
 
-    }
+
 }
