@@ -21,7 +21,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                         "GpsID INTEGER PRIMARY KEY, " +
                         "Longitude REAL NOT NULL, " +
                         "Latitide REAL NOT NULL, " +
-                        "Date INT NOT NULL" +
+                        "Date TEXT NOT NULL" +
                         ")";
 
         db.execSQL(CREATE_GPS_TABLE);
