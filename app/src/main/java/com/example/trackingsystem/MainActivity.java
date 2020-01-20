@@ -9,9 +9,13 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
     private static LocationManager locMan = null;
@@ -70,13 +74,28 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     private void displayLocation(Location location){
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
+        GPS gps = new GPS(latitude,longitude,getSysdate());
+
         EditText edLat = findViewById(R.id.editTextLat);
         EditText edLong = findViewById(R.id.editTextLon);
         EditText edDate = findViewById(R.id.editTextDate);
 
-        edLat.setText(String.format("%.4f",latitude));
-        edLong.setText(String.format("%.4f",latitude));
 
+        edLat.setText(String.format("%.4f",latitude));
+        edLong.setText(String.format("%.4f",longitude));
+        edDate.setText(getSysdate());
+
+
+
+
+    }
+    public static String getSysdate(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.mm.yyyy  HH:mm");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
+    }
+
+    private void anzeigenClick( View source){
 
     }
 }
