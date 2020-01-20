@@ -15,12 +15,22 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        final String CREATE_GPS_TABLE =
+                "CREATE TABLE GPS" +
+                        "(" +
+                        "GpsID INTEGER PRIMARY KEY, " +
+                        "Longitude REAL NOT NULL, " +
+                        "Latitide REAL NOT NULL, " +
+                        "Date INT NOT NULL" +
+                        ")";
 
+        db.execSQL(CREATE_GPS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // WIP: delete Tables
+        final String DROP_GPS = "DROP TABLE GPS";
+        db.execSQL(DROP_GPS);
         onCreate(db);
     }
 }
